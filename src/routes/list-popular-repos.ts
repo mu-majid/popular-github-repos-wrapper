@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import { validate } from '../middlewares/validate';
 import { listPopularRepos } from '../validation-schemas';
 import github from '../third-party/github-api';
+import { BadRequestError } from '../errors/bad-request';
 
 const router = express.Router();
 
@@ -11,11 +12,10 @@ router.get(
 
   async (req: Request, res: Response) => {
     try {
-      console.log('hello ')
-      const { sort, order, page, per_page } = req.query;
-      const { data } = await github.get('/search/repositories', {
+      const { sort, order, page, per_page, language } = req.query;
+      const response = await github.get('/search/repositories', {
         params: {
-          q: 'tetris+language:assembly',
+          q: `${language ? 'language:'+language : '*'}`,
           sort,
           order,
           page,
@@ -23,11 +23,13 @@ router.get(
         }
       });
 
-      return res.status(200).send(data);
+      return res.status(200).send(response.data);
     }
     catch (error) {
-      console.log(error);
-      throw error;
+      // TODO: Should be replaced by a proper logger
+      console.log('Axios Error : ', error.response.data);
+
+      throw new BadRequestError(error.isAxiosError ? error.response.data.message : error.message);
     }
   });
 

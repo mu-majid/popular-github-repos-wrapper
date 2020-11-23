@@ -4,7 +4,6 @@ import Joi from 'joi';
 export const listPopularRepos: IValidation = {
   query: Joi.object().keys({
 
-
     sort: Joi.string()
       .default('stars')
       .valid('stars')
@@ -26,7 +25,11 @@ export const listPopularRepos: IValidation = {
       .default(30) // github default
       .max(100)
       .optional()
-      .description('Specifies number of elements to retrive from github')
+      .description('Specifies number of elements to retrive from github'),
+
+    language: Joi.string()
+      .optional()
+      .description('filter repos written in a specifc language.')
 
   }).optional()
 };
