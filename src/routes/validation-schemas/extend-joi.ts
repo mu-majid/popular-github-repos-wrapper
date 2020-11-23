@@ -7,4 +7,3 @@ export const stringArraySchema = (<any>Joi).extend((joi: any) => ({
     value: value.split ? value.split(',').map((v: string) => v.trim()) : value
   })
 }));
-

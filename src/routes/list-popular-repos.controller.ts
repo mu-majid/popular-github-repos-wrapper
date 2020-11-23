@@ -4,6 +4,7 @@ import { listPopularRepos } from './validation-schemas';
 import github from '../third-party/github-api';
 import { BadRequestError } from '../errors/bad-request';
 import { formatSearchQuery } from '../services/list-popular-repos.service';
+import { GithubError } from '../errors/github-validation-error';
 
 const router = express.Router();
 
@@ -35,8 +36,12 @@ router.get(
     catch (error) {
       // TODO: Should be replaced by a proper logger
       console.log('Axios Error : ', error.response.data);
+      if (error.isAxiosError) {
+        throw new GithubError(error.response.data);
+      }
 
-      throw new BadRequestError(error.isAxiosError ? error.response.data.message : error.message);
+      throw new BadRequestError(error.message);
+      
     }
   });
 

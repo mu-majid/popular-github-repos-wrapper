@@ -6,7 +6,7 @@ export const listPopularRepos: IValidation = {
   query: Joi.object().keys({
 
     searchText: Joi.string()
-      .description('a full or a subset of a email subject or creator to search for.'),
+      .description('all github search capabilities could be achieved using this attribute alone.'),
 
     sort: Joi.string()
       .default('stars')
