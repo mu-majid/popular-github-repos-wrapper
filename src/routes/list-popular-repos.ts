@@ -12,12 +12,14 @@ router.get(
   async (req: Request, res: Response) => {
     try {
       console.log('hello ')
-      const { sort, order } = req.query;
+      const { sort, order, page, per_page } = req.query;
       const { data } = await github.get('/search/repositories', {
         params: {
           q: 'tetris+language:assembly',
           sort,
-          order
+          order,
+          page,
+          per_page
         }
       });
 

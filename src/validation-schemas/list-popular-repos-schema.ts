@@ -15,7 +15,18 @@ export const listPopularRepos: IValidation = {
       .default('desc')
       .when('sort', { is: Joi.exist(), then: Joi.string().default('desc'), otherwise: Joi.optional() })
       .description('the order of the performed sort. it will be applied to all attributes provided in the sort array.')
-      .example('desc')
+      .example('desc'),
+
+    page: Joi.number()
+      .default(1)
+      .optional()
+      .description('Specify page to retrieve'),
+
+    per_page: Joi.number()
+      .default(30) // github default
+      .max(100)
+      .optional()
+      .description('Specifies number of elements to retrive from github')
 
   }).optional()
 };
