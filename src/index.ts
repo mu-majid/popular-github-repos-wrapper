@@ -1,14 +1,16 @@
 import express from 'express';
 import 'express-async-errors';
 import { json } from 'body-parser';
+import cors from 'cors';
 
-import { popularReposRouter } from './routes/list-popular-repos';
+import { popularReposRouter } from './routes/list-popular-repos.controller';
 import { errorHandler } from './middlewares/error-handler';
 import { NotFoundError } from './errors/not-found';
 
 
 // cookie here is for transporting jwt
 const app = express();
+app.use(cors());
 app.use(json());
 app.use(popularReposRouter);
 

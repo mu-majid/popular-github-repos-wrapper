@@ -1,9 +1,12 @@
-import { IValidation } from "../interfaces";
+import { IValidation } from "../../interfaces";
 import Joi from 'joi';
 import { stringArraySchema } from "./extend-joi";
 
 export const listPopularRepos: IValidation = {
   query: Joi.object().keys({
+
+    searchText: Joi.string()
+      .description('a full or a subset of a email subject or creator to search for.'),
 
     sort: Joi.string()
       .default('stars')
@@ -33,7 +36,13 @@ export const listPopularRepos: IValidation = {
       .items(
         Joi.string()
       )
-      .description('filter repos written in a specifc language.')
+      .description('filter repos written in a specifc language.'),
+
+    createdAt: Joi.date()
+      .raw()
+      .max('now')
+      .optional()
+      .description('Repos created from this date onwards should be returned')
 
   }).optional()
 };
