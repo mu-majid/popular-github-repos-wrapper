@@ -10,8 +10,6 @@ import { NotFoundError } from './errors/not-found';
 // cookie here is for transporting jwt
 const app = express();
 app.use(json());
-
-
 app.use(popularReposRouter);
 
 app.all('*', async () => {

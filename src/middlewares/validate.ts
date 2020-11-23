@@ -1,17 +1,11 @@
 import Joi from 'joi';
 import { Request, Response, NextFunction } from 'express';
 import { RequestValidationError } from '../errors/request-validation-error';
-
-export interface IValidation {
-  body?: Joi.SchemaLike;
-  headers?: Joi.SchemaLike;
-  query?: Joi.SchemaLike;
-  cookies?: Joi.SchemaLike;
-  params?: Joi.SchemaLike;
-}
+import { IValidation } from '../interfaces';
 
 
-const validate = (schema: IValidation) => {
+
+export const validate = (schema: IValidation) => {
   return (
     req: Request,
     res: Response,
@@ -19,7 +13,9 @@ const validate = (schema: IValidation) => {
   ) => {
     // options could be dynamic per erquest attribute (out of scope)
     const result = Joi.object().keys(<any>schema).validate(req, { abortEarly: false, allowUnknown: true });
-    console.log('validation result : ', result);
+    console.log('validation result : ', result.error);
+    console.log('validation result : ', result.errors);
+
 
     if (result.error) {
       const { details } = result.error;
@@ -27,8 +23,8 @@ const validate = (schema: IValidation) => {
     }
     else {
       // assign value to request (if we were manipulating attributes)
+      Object.assign(req, result.value);
       next();
     }
   }
 }
-module.exports = validate;
