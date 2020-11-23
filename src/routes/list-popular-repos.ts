@@ -13,15 +13,20 @@ router.get(
   async (req: Request, res: Response) => {
     try {
       const { sort, order, page, per_page, language } = req.query;
+      console.log(language)
+      const languageQuery = language ? (<string[]>language).map((l: string) => `language:${l}`).join(' ') : '*';
+      console.log(languageQuery)
       const response = await github.get('/search/repositories', {
         params: {
-          q: `${language ? 'language:'+language : '*'}`,
+          q: languageQuery,
           sort,
           order,
           page,
           per_page
         }
       });
+
+      console.log(response.request)
 
       return res.status(200).send(response.data);
     }

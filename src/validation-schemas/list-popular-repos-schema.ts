@@ -1,5 +1,6 @@
 import { IValidation } from "../interfaces";
 import Joi from 'joi';
+import { stringArraySchema } from "./extend-joi";
 
 export const listPopularRepos: IValidation = {
   query: Joi.object().keys({
@@ -27,8 +28,11 @@ export const listPopularRepos: IValidation = {
       .optional()
       .description('Specifies number of elements to retrive from github'),
 
-    language: Joi.string()
-      .optional()
+    language: stringArraySchema
+      .stringArray()
+      .items(
+        Joi.string()
+      )
       .description('filter repos written in a specifc language.')
 
   }).optional()
