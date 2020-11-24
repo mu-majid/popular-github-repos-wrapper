@@ -29,7 +29,6 @@ router.get(
           per_page
         }
       });
-      console.log(response.request)
 
       return res.status(200).send(response.data);
     }
@@ -41,7 +40,6 @@ router.get(
       }
 
       throw new BadRequestError(error.message);
-      
     }
   });
 

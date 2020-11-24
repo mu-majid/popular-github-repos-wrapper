@@ -23,3 +23,5 @@ app.use(errorHandler);
 app.listen(3000, () => {
   console.log('Popular repos Server on port 3000!!!');
 });
+
+export default app;
