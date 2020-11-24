@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev src/index.ts"
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "start:watch": "ts-node-dev src/index.ts",
+    "test": "mocha src/**/**/*.spec.ts",
+    "test:e2e": "mocha src/**/**/*.e2e-spec.ts"
   },
   "keywords": [],
   "author": "",
@@ -21,7 +25,12 @@
     "typescript": "^4.1.2"
   },
   "devDependencies": {
+    "@types/chai": "^4.2.14",
     "@types/cors": "^2.8.8",
-    "@types/hapi__joi": "^17.1.6"
+    "@types/hapi__joi": "^17.1.6",
+    "@types/mocha": "^8.0.4",
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1",
+    "ts-node": "^9.0.0"
   }
 }
