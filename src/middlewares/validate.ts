@@ -3,8 +3,6 @@ import { Request, Response, NextFunction } from 'express';
 import { RequestValidationError } from '../errors/request-validation-error';
 import { IValidation } from '../interfaces';
 
-
-
 export const validate = (schema: IValidation) => {
   return (
     req: Request,

@@ -1,9 +1,9 @@
 import moment from 'moment';
 
 export const formatSearchQuery = (
-  searchText: string,
-  languages: string[],
-  created: string
+  searchText?: string,
+  languages?: string[],
+  created?: string
 ) => {
   // default q params
   if (!searchText && !languages && !created) {
