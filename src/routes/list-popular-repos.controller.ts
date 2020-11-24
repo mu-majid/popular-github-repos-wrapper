@@ -20,7 +20,6 @@ router.get(
         <string[]>language,
         <string>createdAt
       );
-      console.log(searchQuery)
       const response = await github.get('/search/repositories', {
         params: {
           q: searchQuery,
@@ -30,6 +29,7 @@ router.get(
           per_page
         }
       });
+      console.log(response.request)
 
       return res.status(200).send(response.data);
     }

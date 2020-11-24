@@ -13,9 +13,6 @@ export const validate = (schema: IValidation) => {
   ) => {
     // options could be dynamic per erquest attribute (out of scope)
     const result = Joi.object().keys(<any>schema).validate(req, { abortEarly: false, allowUnknown: true });
-    console.log('validation result : ', result.error);
-    console.log('validation result : ', result.errors);
-
 
     if (result.error) {
       const { details } = result.error;
