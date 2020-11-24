@@ -9,7 +9,7 @@ export const formatSearchQuery = (
   if (!searchText && !languages && !created) {
     return `created:${moment().format('YYYY-MM-DD')}`;
   }
-  const dateFilter = created ? `created:${created}` : '';
+  const dateFilter = created ? `created:>=${created}` : '';
   const languageQuery = languages?.length ? (<string[]>languages).map((l: string) => `language:${l}`).join(' ') : '';
   searchText = searchText || '';
 

@@ -65,7 +65,7 @@ describe('List Popular repos Controller.', () => {
     it("List all with custom creation date", async () => {
       get.resolves({ data: responses.simpleRes });
       await supertest(ExpressApp).get('/api/repos?createdAt=2020-11-24');
-      expect(get.args[0][1].params.q).to.equal('created:2020-11-24');
+      expect(get.args[0][1].params.q).to.equal('created:>=2020-11-24');
       expect(get.args[0][1].params.sort).to.equal('stars');
       expect(get.args[0][1].params.order).to.equal('desc');
       expect(get.args[0][1].params.page).to.equal(1);

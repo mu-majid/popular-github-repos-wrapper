@@ -29,13 +29,13 @@ describe('List Popular Repos Service', () => {
     it('Should not default anything if one of the params was provided - created provided case', () => {
       const query = formatSearchQuery(undefined, undefined, '2020-11-24');
 
-      expect(query).to.equal('created:2020-11-24');
+      expect(query).to.equal('created:>=2020-11-24');
     });
 
     it('Should set query if all params were provided.', () => {
       const query = formatSearchQuery('cats NOT "hello world"', ['java', 'python'], '2020-11-24');
 
-      expect(query).to.equal('cats NOT "hello world" language:java language:python created:2020-11-24');
+      expect(query).to.equal('cats NOT "hello world" language:java language:python created:>=2020-11-24');
     });
   });
 });
