@@ -29,8 +29,6 @@ Further Enhancements :
 
 ## Introduction
 
-This project is a task for a Node.JS job at Shop-Apotheke. The task was divided into two parts (front-end, and back-end). I chose to implement the backend part.
-
 It is a simple wrapper for the github public apis, specifically a public endpoint for searching for repositories. I chose to implement only one endpoint to wrap the github api and control the search criteria via query params.
 
 
