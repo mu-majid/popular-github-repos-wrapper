@@ -15,6 +15,8 @@ export class GithubError extends CustomError {
     Object.setPrototypeOf(this, GithubError.prototype);
   }
 
+  // Handle Case: Gtihub Error might be not of the same structure
+  // (In case of rate limit error)
   public serializeError() {
     return this.err.errors.map(e => {
       return { message: this.err.message, field: `Field ${e.field}, with code ${e.code}, related to resource ${e.resource}` };

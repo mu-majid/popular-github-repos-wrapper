@@ -20,8 +20,8 @@ app.all('*', async () => {
 
 app.use(errorHandler);
 
-app.listen(3000, () => {
-  console.log('Popular repos Server on port 3000!!!');
+app.listen(3001, () => {
+  console.log('Popular repos Server on port 3001!!!');
 });
 
 export default app;
